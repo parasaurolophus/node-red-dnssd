@@ -1,0 +1,36 @@
+<script type="text/javascript">
+    RED.nodes.registerType('dnssd', {
+        category: 'network-input',
+        color: 'palegoldenrod',
+        defaults: {
+            name: { value: "" },
+            service: { value: "" },
+            udp: { value: false }
+        },
+        inputs: 0,
+        outputs: 3,
+        icon: "bonjour.png",
+        label: function () {
+            return this.name || "dnssd";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="dnssd">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-service"><i class="fa fa-gear"></i> Service</label>
+        <input type="text" id="node-input-service" placeholder="_hue">
+    </div>
+    <div class="form-row">
+        <label for="node-input-udp"><i class="fa fa-gear"></i> Use UDP?</label>
+        <input type="checkbox" id="node-input-udp">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="dnssd">
+    <p>Wrap @gravitysoftware/dnssd package for Node-RED</p>
+</script>

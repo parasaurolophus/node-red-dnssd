@@ -1,0 +1,74 @@
+[
+    {
+        "id": "5f7f1ac36c0f600f",
+        "type": "dnssd",
+        "z": "5396f3573f6faaed",
+        "name": "",
+        "service": "_hue",
+        "udp": false,
+        "x": 250,
+        "y": 200,
+        "wires": [
+            [
+                "ca6e6013752e86e6"
+            ],
+            [
+                "e2cb24504b928026"
+            ],
+            [
+                "a476aac1d9378e31"
+            ]
+        ]
+    },
+    {
+        "id": "ca6e6013752e86e6",
+        "type": "debug",
+        "z": "5396f3573f6faaed",
+        "name": "dnssd serviceUp",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 470,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "e2cb24504b928026",
+        "type": "debug",
+        "z": "5396f3573f6faaed",
+        "name": "dnssd serviceDown",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 470,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "a476aac1d9378e31",
+        "type": "debug",
+        "z": "5396f3573f6faaed",
+        "name": "dnssd error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 450,
+        "y": 280,
+        "wires": []
+    }
+]
