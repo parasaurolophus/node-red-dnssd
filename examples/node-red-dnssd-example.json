@@ -1,30 +1,59 @@
 [
     {
-        "id": "5f7f1ac36c0f600f",
-        "type": "dnssd",
+        "id": "a7ecc998115ca487",
+        "type": "inject",
         "z": "5396f3573f6faaed",
         "name": "",
-        "service": "_hue",
-        "udp": false,
-        "x": 250,
-        "y": 200,
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 80,
         "wires": [
             [
-                "ca6e6013752e86e6"
-            ],
-            [
-                "e2cb24504b928026"
-            ],
-            [
-                "a476aac1d9378e31"
+                "0df3423884489427"
             ]
         ]
     },
     {
-        "id": "ca6e6013752e86e6",
+        "id": "32bac9efb31aca70",
+        "type": "dnssd-browser",
+        "z": "5396f3573f6faaed",
+        "name": "",
+        "service": "_fubar",
+        "udp": false,
+        "x": 120,
+        "y": 440,
+        "wires": [
+            [
+                "7e5f97f5511f4496"
+            ],
+            [
+                "07cb145cdd653775"
+            ],
+            [
+                "928a883130ee4c7a"
+            ]
+        ]
+    },
+    {
+        "id": "7e5f97f5511f4496",
         "type": "debug",
         "z": "5396f3573f6faaed",
-        "name": "dnssd serviceUp",
+        "name": "browser serviceUp",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -33,15 +62,15 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "counter",
-        "x": 470,
-        "y": 120,
+        "x": 350,
+        "y": 380,
         "wires": []
     },
     {
-        "id": "e2cb24504b928026",
+        "id": "07cb145cdd653775",
         "type": "debug",
         "z": "5396f3573f6faaed",
-        "name": "dnssd serviceDown",
+        "name": "browser serviceDown",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -50,25 +79,189 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "counter",
-        "x": 470,
+        "x": 360,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "928a883130ee4c7a",
+        "type": "debug",
+        "z": "5396f3573f6faaed",
+        "name": "browser error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 330,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "826af5b9bc577021",
+        "type": "debug",
+        "z": "5396f3573f6faaed",
+        "name": "advertisement hostRenamed",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 660,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "2a1ab4984d804cd4",
+        "type": "debug",
+        "z": "5396f3573f6faaed",
+        "name": "advertisement stopped",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 640,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "755fce532daa3f01",
+        "type": "debug",
+        "z": "5396f3573f6faaed",
+        "name": "advertisement error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 630,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "8eb15692caa812b9",
+        "type": "inject",
+        "z": "5396f3573f6faaed",
+        "name": "start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"command\":\"start\"}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 140,
+        "wires": [
+            [
+                "0df3423884489427"
+            ]
+        ]
+    },
+    {
+        "id": "3be77c27c96dabe0",
+        "type": "inject",
+        "z": "5396f3573f6faaed",
+        "name": "stop",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"command\":\"stop\"}",
+        "payloadType": "json",
+        "x": 130,
         "y": 200,
-        "wires": []
+        "wires": [
+            [
+                "0df3423884489427"
+            ]
+        ]
     },
     {
-        "id": "a476aac1d9378e31",
-        "type": "debug",
+        "id": "a1a1ca067a765584",
+        "type": "inject",
         "z": "5396f3573f6faaed",
-        "name": "dnssd error",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": true,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "counter",
-        "x": 450,
-        "y": 280,
-        "wires": []
+        "name": "updateTXT",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\t   \"command\":\"updateTXT\",\t   \"txt\":{ \"timestamp\":$millis()}\t}",
+        "payloadType": "jsonata",
+        "x": 120,
+        "y": 260,
+        "wires": [
+            [
+                "0df3423884489427"
+            ]
+        ]
+    },
+    {
+        "id": "0df3423884489427",
+        "type": "dnssd-advertisement",
+        "z": "5396f3573f6faaed",
+        "name": "",
+        "service": "_fubar",
+        "port": "6666",
+        "options": "{\"txt\":{\"timestamp\":0}}",
+        "udp": false,
+        "x": 360,
+        "y": 180,
+        "wires": [
+            [
+                "3a8e34df441bf4d5"
+            ],
+            [
+                "826af5b9bc577021"
+            ],
+            [
+                "2a1ab4984d804cd4"
+            ],
+            [
+                "755fce532daa3f01"
+            ]
+        ]
     }
 ]
