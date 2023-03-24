@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    RED.nodes.registerType('dnssd', {
+    RED.nodes.registerType('dnssd-browser', {
         category: 'network-input',
         color: 'palegoldenrod',
         defaults: {
@@ -9,14 +9,39 @@
         },
         inputs: 0,
         outputs: 3,
+        outputLabels: ["serviceUp", "serviceDown", "error"],
         icon: "bonjour.png",
         label: function () {
-            return this.name || "dnssd";
+            return this.name || "dnssd-browser";
+        }
+    });
+
+    RED.nodes.registerType('dnssd-advertisement', {
+        category: 'network-input',
+        color: 'palegoldenrod',
+        defaults: {
+            name: { value: "" },
+            service: { value: "" },
+            port: { value: 0 },
+            options: { value: null },
+            udp: { value: false }
+        },
+        oneditprepare: function () {
+            $("#node-input-port").typedInput({ type: "num", types: ["num"] })
+            $("#node-input-options").typedInput({ type: "json", types: ["json"] })
+        },
+        inputs: 1,
+        outputs: 4,
+        inputLabels: "command",
+        outputLabels: ["instanceRenamed", "hostRenamed", "stopped", "error"],
+        icon: "bonjour.png",
+        label: function () {
+            return this.name || "dnssd-advertisement";
         }
     });
 </script>
 
-<script type="text/html" data-template-name="dnssd">
+<script type="text/html" data-template-name="dnssd-browser">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
@@ -31,6 +56,33 @@
     </div>
 </script>
 
-<script type="text/html" data-help-name="dnssd">
-    <p>Wrap @gravitysoftware/dnssd package for Node-RED</p>
+<script type="text/html" data-help-name="dnssd-browser">
+    <p>Wrap Browser from @gravitysoftware/dnssd package for Node-RED</p>
+</script>
+
+<script type="text/html" data-template-name="dnssd-advertisement">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-service"><i class="fa fa-gear"></i> Service</label>
+        <input type="text" id="node-input-service" placeholder="_http">
+    </div>
+    <div class="form-row">
+        <label for="node-input-port"><i class="fa fa-gear"></i> Port</label>
+        <input type="text" id="node-input-port" placeholder="80">
+    </div>
+    <div class="form-row">
+        <label for="node-input-options"><i class="fa fa-gear"></i> Options</label>
+        <input type="text" id="node-input-options" placeholder="null">
+    </div>
+    <div class="form-row">
+        <label for="node-input-udp"><i class="fa fa-gear"></i> Use UDP?</label>
+        <input type="checkbox" id="node-input-udp">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="dnssd-advertisement">
+    <p>Wrap Advertisement from @gravitysoftware/dnssd package for Node-RED</p>
 </script>
