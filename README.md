@@ -4,11 +4,20 @@ Wrap
 [@gravitysoftware/dnssd](https://www.npmjs.com/package/@gravitysoftware/dnssd)
 for use in [Node-RED](https://nodered.org).
 
+![](./screenshot.png)
+
+This provides a superset of the functionality supported by
+[node-red-node-discovery](https://flows.nodered.org/node/node-red-node-discovery),
+without generating any warnings
+in the Node-RED log.
+
+---
+
 ## dnssd-browser
 
 ### Input
 
-none
+- none
 
 ### Outputs
 
@@ -16,24 +25,48 @@ none
 2. Stream of `Browser.serviceDown()` events
 3. Stream of `Browser.error()` events
 
+---
+
 ## dnssd-advertisement
 
 ### Input
 
-`msg.payload.command` specifies a `dnssd.Advertisement` method to
-invoke:
+`msg.payload.command` specifies a `dnssd.Advertisement`
+method to invoke:
 
-- `start`
-- `stop`
-- `updateTXT`
+#### `start`
 
-For `updateTXT`, `msg.payload.txt` must be the new set of key/value
-pairs.
+Broadcast a "service up" event.
 
-**Note:** `dnssd.Advertisement.updateTXT()` seems to be only partially
-functional, so this feature is provided largely for completeness
-(which is to say, a symptom of this node's author's mild OCD when
-it comes to software).
+```json
+{ "payload": { "command": "start" } }
+```
+
+#### `stop`
+
+Broadcast a "service down" event.
+
+```json
+{ "payload": { "command": "stop" } }
+```
+
+#### `updateTXT`
+
+Update the `TXT` record. (Note that this is provided for
+completeness but is of limited utility since it does not
+trigger any of the events exposed by the `dnssd.Browser`
+object.)
+
+```json
+{
+    "payload": {
+        "command": "updateTXT",
+        "txt": {
+            "foo": "bar"
+        }
+    }
+}
+```
 
 ### Outputs
 
@@ -41,6 +74,8 @@ it comes to software).
 2. Stream of `Advertiser.hostRenamed()` events
 3. Stream of `Advertiser.stopped()` events
 3. Stream of `Advertiser.error()` events
+
+---
 
 ## Details
 
@@ -50,14 +85,14 @@ which is a pure JavaScript implementation of
 [DNS-SD](http://www.dns-sd.org/).
 
 The _Service_ configuration string is the name of the
-DNS-SD service to watch for by `dnssd-browser` or broadcast
-using `dnssd-advertisement`.
+DNS-SD service to broadcast using `dnssd-advertisement` or
+watch using `dnssd-browser`.
 
 By default, these nodes will use TCP. The _Use UDP?_
 configuration checkbox tells them to use UDP instead.
 
 `dnssd-advertisement` also requires a _Port_ number and
-can optionally take _Options_, including a `txt` record.
+can optionally take _Options_, including a `txt` record. _Options_ may be specified using JSON or JSONata.
 
 While `dnssd-browser` nodes start listening automatically
 when flows start, `dnssd-advertiser` nodes must be started
@@ -65,15 +100,5 @@ explicitly by sending a `msg` with `command` set to `start`
 to their inputs:
 
 ```json
-{ "payload" : { "command": "start" }}
+{ "payload" : { "command": "start" } }
 ```
-
-## Notes
-
-- A future version may add support for dnssd.all() in
-  addition if a need arises which, so far, has not.
-- This is effectively a drop-in replacement for
-  [node-red-node-discovery](https://www.npmjs.com/package/node-red-node-discovery)
-  but without any non-JavaScript dependencies, with support
-  for IPv6 addresses and no  warnings in the Node-RED log at
-  startup.

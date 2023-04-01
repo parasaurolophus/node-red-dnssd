@@ -21,14 +21,15 @@
         color: 'palegoldenrod',
         defaults: {
             name: { value: "" },
-            service: { value: "" },
-            port: { value: 0 },
-            options: { value: null },
+            service: { value: "_http" },
+            port: { value: 80 },
+            options: { value: "{}" },
+            optionstype: { value: "json" },
             udp: { value: false }
         },
         oneditprepare: function () {
             $("#node-input-port").typedInput({ type: "num", types: ["num"] })
-            $("#node-input-options").typedInput({ type: "json", types: ["json"] })
+            $("#node-input-options").typedInput({ type: "json", types: ["json", "jsonata"], typeField: "#node-input-optionstype" })
         },
         inputs: 1,
         outputs: 4,
@@ -76,6 +77,7 @@
     <div class="form-row">
         <label for="node-input-options"><i class="fa fa-gear"></i> Options</label>
         <input type="text" id="node-input-options" placeholder="null">
+        <input type="hidden" id="node-input-optionstype">
     </div>
     <div class="form-row">
         <label for="node-input-udp"><i class="fa fa-gear"></i> Use UDP?</label>

@@ -1,59 +1,51 @@
 [
     {
-        "id": "a7ecc998115ca487",
-        "type": "inject",
-        "z": "5396f3573f6faaed",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
+        "id": "e3aa15dab4b8c309",
+        "type": "group",
+        "z": "d6908b36e8cd5164",
+        "name": "browse the \"fubar\" service",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "bc1ac8a9eb8d9aaa",
+            "fe2e2956d983de0a",
+            "8705919cac494af1",
+            "f25897d15f956c83"
         ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 120,
-        "y": 80,
-        "wires": [
-            [
-                "0df3423884489427"
-            ]
-        ]
+        "x": 14,
+        "y": 359,
+        "w": 432,
+        "h": 202
     },
     {
-        "id": "32bac9efb31aca70",
+        "id": "bc1ac8a9eb8d9aaa",
         "type": "dnssd-browser",
-        "z": "5396f3573f6faaed",
+        "z": "d6908b36e8cd5164",
+        "g": "e3aa15dab4b8c309",
         "name": "",
         "service": "_fubar",
         "udp": false,
         "x": 120,
-        "y": 440,
+        "y": 460,
         "wires": [
             [
-                "7e5f97f5511f4496"
+                "fe2e2956d983de0a"
             ],
             [
-                "07cb145cdd653775"
+                "8705919cac494af1"
             ],
             [
-                "928a883130ee4c7a"
+                "f25897d15f956c83"
             ]
         ]
     },
     {
-        "id": "7e5f97f5511f4496",
+        "id": "fe2e2956d983de0a",
         "type": "debug",
-        "z": "5396f3573f6faaed",
-        "name": "browser serviceUp",
+        "z": "d6908b36e8cd5164",
+        "g": "e3aa15dab4b8c309",
+        "name": "serviceUp",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -62,15 +54,16 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "counter",
-        "x": 350,
-        "y": 380,
+        "x": 320,
+        "y": 400,
         "wires": []
     },
     {
-        "id": "07cb145cdd653775",
+        "id": "8705919cac494af1",
         "type": "debug",
-        "z": "5396f3573f6faaed",
-        "name": "browser serviceDown",
+        "z": "d6908b36e8cd5164",
+        "g": "e3aa15dab4b8c309",
+        "name": "serviceDown",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -79,14 +72,15 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "counter",
-        "x": 360,
-        "y": 440,
+        "x": 330,
+        "y": 460,
         "wires": []
     },
     {
-        "id": "928a883130ee4c7a",
+        "id": "f25897d15f956c83",
         "type": "debug",
-        "z": "5396f3573f6faaed",
+        "z": "d6908b36e8cd5164",
+        "g": "e3aa15dab4b8c309",
         "name": "browser error",
         "active": true,
         "tosidebar": true,
@@ -97,14 +91,66 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 330,
-        "y": 500,
+        "y": 520,
         "wires": []
     },
     {
-        "id": "826af5b9bc577021",
+        "id": "465b2246c4aec2c8",
+        "type": "group",
+        "z": "d6908b36e8cd5164",
+        "name": "advertise the \"fubar\" service on port 6666 with a TXT record formatted using JSONata",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "186faf910b61cb76",
+            "2551a0e57b67d8e7",
+            "bd6b6932174ccce0",
+            "ef7fbb29d69dd033",
+            "a179bebdb1fe4d62",
+            "33b881dbe696cb0c",
+            "8a0b196c3d3d9fc8",
+            "86516f240bf0b2c9"
+        ],
+        "x": 14,
+        "y": 19,
+        "w": 732,
+        "h": 322
+    },
+    {
+        "id": "186faf910b61cb76",
+        "type": "dnssd-advertisement",
+        "z": "d6908b36e8cd5164",
+        "g": "465b2246c4aec2c8",
+        "name": "",
+        "service": "_fubar",
+        "port": "6666",
+        "options": "{\"txt\":{\"timestamp\":$millis()}}",
+        "optionstype": "jsonata",
+        "udp": false,
+        "x": 340,
+        "y": 180,
+        "wires": [
+            [
+                "2551a0e57b67d8e7"
+            ],
+            [
+                "bd6b6932174ccce0"
+            ],
+            [
+                "ef7fbb29d69dd033"
+            ],
+            [
+                "a179bebdb1fe4d62"
+            ]
+        ]
+    },
+    {
+        "id": "2551a0e57b67d8e7",
         "type": "debug",
-        "z": "5396f3573f6faaed",
-        "name": "advertisement hostRenamed",
+        "z": "d6908b36e8cd5164",
+        "g": "465b2246c4aec2c8",
+        "name": "instanceRenamed",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -113,15 +159,34 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "counter",
-        "x": 660,
+        "x": 610,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "bd6b6932174ccce0",
+        "type": "debug",
+        "z": "d6908b36e8cd5164",
+        "g": "465b2246c4aec2c8",
+        "name": "hostRenamed",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 600,
         "y": 140,
         "wires": []
     },
     {
-        "id": "2a1ab4984d804cd4",
+        "id": "ef7fbb29d69dd033",
         "type": "debug",
-        "z": "5396f3573f6faaed",
-        "name": "advertisement stopped",
+        "z": "d6908b36e8cd5164",
+        "g": "465b2246c4aec2c8",
+        "name": "stopped",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -130,14 +195,15 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "counter",
-        "x": 640,
+        "x": 580,
         "y": 220,
         "wires": []
     },
     {
-        "id": "755fce532daa3f01",
+        "id": "a179bebdb1fe4d62",
         "type": "debug",
-        "z": "5396f3573f6faaed",
+        "z": "d6908b36e8cd5164",
+        "g": "465b2246c4aec2c8",
         "name": "advertisement error",
         "active": true,
         "tosidebar": true,
@@ -147,14 +213,15 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "counter",
-        "x": 630,
+        "x": 610,
         "y": 300,
         "wires": []
     },
     {
-        "id": "8eb15692caa812b9",
+        "id": "33b881dbe696cb0c",
         "type": "inject",
-        "z": "5396f3573f6faaed",
+        "z": "d6908b36e8cd5164",
+        "g": "465b2246c4aec2c8",
         "name": "start",
         "props": [
             {
@@ -173,17 +240,18 @@
         "payload": "{\"command\":\"start\"}",
         "payloadType": "json",
         "x": 130,
-        "y": 140,
+        "y": 120,
         "wires": [
             [
-                "0df3423884489427"
+                "186faf910b61cb76"
             ]
         ]
     },
     {
-        "id": "3be77c27c96dabe0",
+        "id": "8a0b196c3d3d9fc8",
         "type": "inject",
-        "z": "5396f3573f6faaed",
+        "z": "d6908b36e8cd5164",
+        "g": "465b2246c4aec2c8",
         "name": "stop",
         "props": [
             {
@@ -202,17 +270,18 @@
         "payload": "{\"command\":\"stop\"}",
         "payloadType": "json",
         "x": 130,
-        "y": 200,
+        "y": 180,
         "wires": [
             [
-                "0df3423884489427"
+                "186faf910b61cb76"
             ]
         ]
     },
     {
-        "id": "a1a1ca067a765584",
+        "id": "86516f240bf0b2c9",
         "type": "inject",
-        "z": "5396f3573f6faaed",
+        "z": "d6908b36e8cd5164",
+        "g": "465b2246c4aec2c8",
         "name": "updateTXT",
         "props": [
             {
@@ -228,39 +297,13 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "{\t   \"command\":\"updateTXT\",\t   \"txt\":{ \"timestamp\":$millis()}\t}",
+        "payload": "{\t   \"command\":\"updateTXT\",\t   \"txt\":{\"timestamp\":$millis()}\t}",
         "payloadType": "jsonata",
         "x": 120,
-        "y": 260,
+        "y": 240,
         "wires": [
             [
-                "0df3423884489427"
-            ]
-        ]
-    },
-    {
-        "id": "0df3423884489427",
-        "type": "dnssd-advertisement",
-        "z": "5396f3573f6faaed",
-        "name": "",
-        "service": "_fubar",
-        "port": "6666",
-        "options": "{\"txt\":{\"timestamp\":0}}",
-        "udp": false,
-        "x": 360,
-        "y": 180,
-        "wires": [
-            [
-                "3a8e34df441bf4d5"
-            ],
-            [
-                "826af5b9bc577021"
-            ],
-            [
-                "2a1ab4984d804cd4"
-            ],
-            [
-                "755fce532daa3f01"
+                "186faf910b61cb76"
             ]
         ]
     }

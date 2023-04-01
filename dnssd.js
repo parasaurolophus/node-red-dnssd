@@ -93,12 +93,14 @@ module.exports = function (RED) {
 
             node.status({ text: node.service, shape: 'dot', fill: 'red' })
             node.send([null, null, null, { payload: event }])
+
         }
 
         function advertisementStopped() {
 
             node.status({ text: node.service, shape: 'dot', fill: 'yellow' })
             node.send([null, null, { payload: new Date().getTime() }, null])
+
         }
 
         function instanceRenamed(event) {
@@ -118,7 +120,7 @@ module.exports = function (RED) {
             RED.nodes.createNode(this, config)
             this.service = config.service
             this.port = Number.parseInt(config.port)
-            this.options = (config.options ? JSON.parse(config.options) : null)
+            this.options = RED.util.evaluateNodeProperty(config.options, config.optionstype, this)
             this.udp = config.udp
             node = this
             node.on('input', onAdvertisementInput)
