@@ -2,10 +2,10 @@ module.exports = function (RED) {
 
     const dnssd = require('@gravitysoftware/dnssd')
 
-    async function evaluateNodePropertySynchronously(options, optionstype, node) {
+    async function evaluateNodePropertySynchronously(property, propertyType, node) {
 
         let p = new Promise((resolve, reject) => {
-            RED.util.evaluateNodeProperty(options, optionstype, node, (value) => {
+            RED.util.evaluateNodeProperty(property, propertyType, node, null, (value) => {
                 resolve(value)
             })
         })
