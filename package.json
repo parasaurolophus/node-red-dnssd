@@ -1,6 +1,6 @@
 {
     "name": "@parasaurolophus/node-red-dnssd",
-    "version": "2.1.2",
+    "version": "2.1.3",
     "description": "Wrap dnssd package for Node-RED",
     "main": "dnssd.js",
     "repository": {

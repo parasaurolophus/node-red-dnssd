@@ -2,18 +2,6 @@ module.exports = function (RED) {
 
     const dnssd = require('@gravitysoftware/dnssd')
 
-    async function evaluateNodePropertySynchronously(property, propertyType, node) {
-
-        let p = new Promise((resolve, reject) => {
-            RED.util.evaluateNodeProperty(property, propertyType, node, null, (value) => {
-                resolve(value)
-            })
-        })
-
-        return await p
-
-    }
-
     function dnssdBrowser(config) {
 
         let node
@@ -132,7 +120,7 @@ module.exports = function (RED) {
             RED.nodes.createNode(this, config)
             this.service = config.service
             this.port = Number.parseInt(config.port)
-            this.options = evaluateNodePropertySynchronously(config.options, config.optionstype, this)
+            this.options = RED.util.evaluateNodeProperty(config.options, config.optionstype, this)
             this.udp = config.udp
             node = this
             node.on('input', onAdvertisementInput)
