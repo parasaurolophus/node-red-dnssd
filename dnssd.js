@@ -26,9 +26,9 @@ module.exports = function (RED) {
         try {
 
             RED.nodes.createNode(this, config)
-            this.service = config.service
-            this.udp = config.udp
             node = this
+            node.service = config.service
+            node.udp = config.udp
             node.status({ text: node.service, shape: 'ring', fill: 'yellow' })
 
             const handler = node.udp ? dnssd.udp : dnssd.tcp
@@ -115,36 +115,42 @@ module.exports = function (RED) {
 
         }
 
-        try {
+        return new Promise((resolve, reject) => {
 
-            RED.nodes.createNode(this, config)
-            this.service = config.service
-            this.port = Number.parseInt(config.port)
-            this.options = RED.util.evaluateNodeProperty(config.options, config.optionstype, this)
-            this.udp = config.udp
-            node = this
-            node.on('input', onAdvertisementInput)
-            node.status({ text: node.service, shape: 'ring', fill: 'yellow' })
+            RED.util.evaluateNodeProperty(config.options, config.optionstype, node, null, (err, value) => {
 
-            const handler = node.udp ? dnssd.udp : dnssd.tcp
-            advertisement = dnssd.Advertisement(handler(node.service), node.port, node.options)
-                .on('error', advertisementError)
-                .on('stopped', advertisementStopped)
-                .on('instanceRenamed', instanceRenamed)
-                .on('hostRenamed', hostRenamed)
+                if (err) {
 
-            node.on('close', function (_removed, done) {
+                    reject(err)
 
-                advertisement.stop(false, function () { done() })
+                }
+
+                RED.nodes.createNode(this, config)
+                node = this
+                node.options = value
+                node.service = config.service
+                node.port = Number.parseInt(config.port)
+                node.udp = config.udp
+                node.on('input', onAdvertisementInput)
+                node.status({ text: node.service, shape: 'ring', fill: 'yellow' })
+
+                const handler = node.udp ? dnssd.udp : dnssd.tcp
+                advertisement = dnssd.Advertisement(handler(node.service), node.port, node.options)
+                    .on('error', advertisementError)
+                    .on('stopped', advertisementStopped)
+                    .on('instanceRenamed', instanceRenamed)
+                    .on('hostRenamed', hostRenamed)
+
+                node.on('close', function (_removed, done) {
+
+                    advertisement.stop(false, function () { done() })
+
+                })
+
+                resolve(node)
 
             })
-
-        } catch (e) {
-
-            node.status({})
-            node.error('dnssdAdvertisement: ' + e)
-
-        }
+        })
     }
 
     try {

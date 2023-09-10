@@ -87,7 +87,8 @@ By default, these nodes will use TCP. The _Use UDP?_ configuration checkbox
 tells them to use UDP instead.
 
 `dnssd-advertisement` also requires a _Port_ number and can optionally take
-_Options_, including a `txt` record. _Options_ may be specified using JSON.
+_Options_, including a `txt` record. _Options_ may be specified using JSON or
+JSONata.
 
 While `dnssd-browser` nodes start listening automatically when flows start,
 `dnssd-advertiser` nodes must be started explicitly by sending a `msg` with
