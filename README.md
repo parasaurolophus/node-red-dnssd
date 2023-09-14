@@ -16,13 +16,38 @@ without generating any warnings in the Node-RED log.
 
 ### Input
 
-- none
+`msg.payload.command` specifies a `dnssd.Browser` mehtod to invoke:
+
+#### `start`
+
+Begin listening for service life-cycle events.
+
+```json
+{ "payload": {  "command": "start" } }
+```
+
+#### `stop`
+
+Stop listening for service life-cycle events.
+
+```json
+{ "payload": {  "command": "stop" } }
+```
+
+#### `list`
+
+Send a list of running services.
+
+```json
+{ "payload": {  "command": "list" } }
+```
 
 ### Outputs
 
 1. Stream of `Browser.serviceUp()` events
 2. Stream of `Browser.serviceDown()` events
 3. Stream of `Browser.error()` events
+4. `Browser.list()` results
 
 ---
 

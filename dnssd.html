@@ -1,21 +1,4 @@
 <script type="text/javascript">
-    RED.nodes.registerType('dnssd-browser', {
-        category: 'network-input',
-        color: 'palegoldenrod',
-        defaults: {
-            name: { value: "" },
-            service: { value: "" },
-            udp: { value: false }
-        },
-        inputs: 0,
-        outputs: 3,
-        outputLabels: ["serviceUp", "serviceDown", "error"],
-        icon: "bonjour.png",
-        label: function () {
-            return this.name || "dnssd-browser";
-        }
-    });
-
     RED.nodes.registerType('dnssd-advertisement', {
         category: 'network-input',
         color: 'palegoldenrod',
@@ -38,6 +21,23 @@
         icon: "bonjour.png",
         label: function () {
             return this.name || "dnssd-advertisement";
+        }
+    });
+
+    RED.nodes.registerType('dnssd-browser', {
+        category: 'network-input',
+        color: 'palegoldenrod',
+        defaults: {
+            name: { value: "" },
+            service: { value: "" },
+            udp: { value: false }
+        },
+        inputs: 1,
+        outputs: 4,
+        outputLabels: ["serviceUp", "serviceDown", "error", "list"],
+        icon: "bonjour.png",
+        label: function () {
+            return this.name || "dnssd-browser";
         }
     });
 </script>
