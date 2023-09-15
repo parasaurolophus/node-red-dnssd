@@ -12,45 +12,6 @@ without generating any warnings in the Node-RED log.
 
 ---
 
-## dnssd-browser
-
-### Input
-
-`msg.payload.command` specifies a `dnssd.Browser` mehtod to invoke:
-
-#### `start`
-
-Begin listening for service life-cycle events.
-
-```json
-{ "payload": {  "command": "start" } }
-```
-
-#### `stop`
-
-Stop listening for service life-cycle events.
-
-```json
-{ "payload": {  "command": "stop" } }
-```
-
-#### `list`
-
-Send a list of running services.
-
-```json
-{ "payload": {  "command": "list" } }
-```
-
-### Outputs
-
-1. Stream of `Browser.serviceUp()` events
-2. Stream of `Browser.serviceDown()` events
-3. Stream of `Browser.error()` events
-4. `Browser.list()` results
-
----
-
 ## dnssd-advertisement
 
 ### Input
@@ -59,11 +20,21 @@ Send a list of running services.
 
 #### `start`
 
-Broadcast a "service up" event.
+Start responding to service enquiries from [browsers](#dnssd-browser).
 
 ```json
-{ "payload": { "command": "start" } }
+{ "payload": {
+        "command": "start"
+        [, "service": name]
+        [, "udp": boolean]
+        [, "port": number]
+        [, "options": json]
+    }
+}
 ```
+
+If the optional `service` name, `udp`, `port` number or `options` values are
+provided, they will override the node's configuration.
 
 #### `stop`
 
@@ -99,6 +70,53 @@ limited utility since it does not trigger any of the events exposed by the
 
 ---
 
+## dnssd-browser
+
+### Input
+
+`msg.payload.command` specifies a `dnssd.Browser` method to invoke:
+
+#### `start`
+
+Begin listening for service life-cycle events.
+
+```json
+{
+    "payload": {
+            "command": "start"
+            [, "service": name]
+            [, "udp": boolean]
+    }
+}
+```
+
+If the optional `service` name or `udp` values are provided, they will override the node's configured values.
+
+#### `stop`
+
+Stop listening for service life-cycle events.
+
+```json
+{ "payload": {  "command": "stop" } }
+```
+
+#### `list`
+
+Send a list of running services.
+
+```json
+{ "payload": {  "command": "list" } }
+```
+
+### Outputs
+
+1. Stream of `Browser.serviceUp()` events
+2. Stream of `Browser.serviceDown()` events
+3. Stream of `Browser.error()` events
+4. `Browser.list()` results
+
+---
+
 ## Details
 
 This is a deliberately thin wrapper around the functionality exposed by
@@ -115,10 +133,6 @@ tells them to use UDP instead.
 _Options_, including a `txt` record. _Options_ may be specified using JSON or
 JSONata.
 
-While `dnssd-browser` nodes start listening automatically when flows start,
-`dnssd-advertiser` nodes must be started explicitly by sending a `msg` with
-`command` set to `start` to their inputs:
-
-```json
-{ "payload" : { "command": "start" } }
-```
+These nodes do not start automatically even if they are fully configured. Use
+`inject` nodes configured to send messages when flows are (re-) started if
+required for your purposes.

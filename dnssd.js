@@ -17,6 +17,14 @@ module.exports = function (RED) {
 
                     case 'start':
 
+                        let udp = msg.payload.udp || node.udp
+                        let service = msg.payload.service || node.service
+                        let port = msg.payload.port || node.port
+                        let options = msg.payload.options || node.options
+                        node.udp = udp
+                        node.service = service
+                        node.port = port
+                        node.options = options
                         restartAdvertisement()
                         break
 
@@ -51,7 +59,7 @@ module.exports = function (RED) {
                 .on('stopped', advertisementStopped)
                 .on('instanceRenamed', instanceRenamed)
                 .on('hostRenamed', hostRenamed)
-            advertisement.start()
+                .start()
             node.status({ text: node.service, shape: 'dot', fill: 'green' })
 
         }
@@ -60,9 +68,17 @@ module.exports = function (RED) {
 
             if (advertisement) {
 
-                advertisement.stop(false)
-                advertisement = null
+                let a = advertisement
 
+                advertisement.stop(false, () => {
+
+                    if (a === advertisement) {
+
+                        advertisement = null
+                        node.status({ text: node.service, shape: 'dot', fill: 'yellow' })
+
+                    }
+                })
             }
         }
 
@@ -95,15 +111,12 @@ module.exports = function (RED) {
 
         function advertisementStopped() {
 
-            advertisement = null
-            node.status({ text: node.service, shape: 'dot', fill: 'yellow' })
             node.send([
                 null,
                 null,
                 {
                     payload: {
-                        timestamp: new Date().getTime(),
-                        started: (advertisement != null)
+                        timestamp: new Date().getTime()
                     }
                 },
                 null
@@ -140,11 +153,17 @@ module.exports = function (RED) {
                     node.service = config.service
                     node.port = Number.parseInt(config.port)
                     node.udp = config.udp
-                    node.on('close', function (_, done) {
+                    node.on('close', (_, done) => {
 
-                       stopAdvertisement()
-                       done()
+                        if (advertisement) {
 
+                            advertisement.stop(false, done)
+
+                        } else {
+
+                            done()
+
+                        }
                     })
 
                     node.on('input', onAdvertisementInput)
@@ -235,6 +254,8 @@ module.exports = function (RED) {
                 switch (msg.payload.command) {
 
                     case 'start':
+                        node.service = msg.payload.service || node.service
+                        node.udp = msg.payload.udp || node.udp
                         restartBrowser()
                         break
 
