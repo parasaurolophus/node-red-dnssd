@@ -18,11 +18,13 @@
             "13c716a6a0e6ba98",
             "60437fc82f3fb7da",
             "c0b839b10368aa7d",
-            "a7b8f04294f6afd2"
+            "a7b8f04294f6afd2",
+            "5dbbbda8d233f3dd",
+            "a440e6b4b8611dc8"
         ],
         "x": 14,
         "y": 359,
-        "w": 892,
+        "w": 1032,
         "h": 322
     },
     {
@@ -33,7 +35,7 @@
         "name": "",
         "service": "_fubar",
         "udp": false,
-        "x": 380,
+        "x": 520,
         "y": 520,
         "wires": [
             [
@@ -65,7 +67,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "counter",
-        "x": 640,
+        "x": 780,
         "y": 400,
         "wires": []
     },
@@ -83,7 +85,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "counter",
-        "x": 650,
+        "x": 790,
         "y": 460,
         "wires": []
     },
@@ -101,7 +103,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "counter",
-        "x": 650,
+        "x": 790,
         "y": 580,
         "wires": []
     },
@@ -110,7 +112,7 @@
         "type": "inject",
         "z": "792c24f42619d667",
         "g": "eb8472f5b4f4f09d",
-        "name": "",
+        "name": "{\"command\":\"start\",\"service\":\"_hue\"}",
         "props": [
             {
                 "p": "payload"
@@ -122,13 +124,13 @@
         ],
         "repeat": "",
         "crontab": "",
-        "once": true,
+        "once": false,
         "onceDelay": "1",
         "topic": "",
-        "payload": "{\"command\":\"start\"}",
+        "payload": "{\"command\":\"start\",\"service\":\"_hue\"}",
         "payloadType": "json",
-        "x": 150,
-        "y": 460,
+        "x": 220,
+        "y": 480,
         "wires": [
             [
                 "cde393f8b207574d"
@@ -157,8 +159,8 @@
         "topic": "",
         "payload": "{\"command\":\"stop\"}",
         "payloadType": "json",
-        "x": 150,
-        "y": 500,
+        "x": 270,
+        "y": 520,
         "wires": [
             [
                 "cde393f8b207574d"
@@ -187,8 +189,8 @@
         "topic": "",
         "payload": "{\"command\":\"list\"}",
         "payloadType": "json",
-        "x": 150,
-        "y": 540,
+        "x": 270,
+        "y": 560,
         "wires": [
             [
                 "cde393f8b207574d"
@@ -209,7 +211,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "counter",
-        "x": 630,
+        "x": 770,
         "y": 640,
         "wires": []
     },
@@ -231,7 +233,7 @@
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 640,
+        "x": 780,
         "y": 520,
         "wires": [
             [
@@ -249,7 +251,7 @@
         "links": [
             "a7b8f04294f6afd2"
         ],
-        "x": 800,
+        "x": 940,
         "y": 520,
         "wires": [],
         "l": true
@@ -263,14 +265,74 @@
         "links": [
             "c0b839b10368aa7d"
         ],
-        "x": 160,
-        "y": 580,
+        "x": 280,
+        "y": 600,
         "wires": [
             [
                 "cde393f8b207574d"
             ]
         ],
         "l": true
+    },
+    {
+        "id": "5dbbbda8d233f3dd",
+        "type": "inject",
+        "z": "792c24f42619d667",
+        "g": "eb8472f5b4f4f09d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "{\"command\":\"start\"}",
+        "payloadType": "json",
+        "x": 270,
+        "y": 400,
+        "wires": [
+            [
+                "cde393f8b207574d"
+            ]
+        ]
+    },
+    {
+        "id": "a440e6b4b8611dc8",
+        "type": "inject",
+        "z": "792c24f42619d667",
+        "g": "eb8472f5b4f4f09d",
+        "name": "{\"command\":\"start\",\"service\":\"_fubar\"}",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "{\"command\":\"start\",\"service\":\"_fubar\"}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 440,
+        "wires": [
+            [
+                "cde393f8b207574d"
+            ]
+        ]
     },
     {
         "id": "465b2246c4aec2c8",
@@ -291,11 +353,13 @@
             "86516f240bf0b2c9",
             "ee68606a0b06cc3d",
             "627a4307fdd3233f",
-            "54527d837f71af4a"
+            "54527d837f71af4a",
+            "3be511bc15b571d7",
+            "348efed9b34e2c21"
         ],
         "x": 14,
         "y": 19,
-        "w": 952,
+        "w": 1092,
         "h": 322
     },
     {
@@ -309,7 +373,7 @@
         "options": "{\"txt\":{\"timestamp\":$millis()}}",
         "optionstype": "jsonata",
         "udp": false,
-        "x": 400,
+        "x": 540,
         "y": 200,
         "wires": [
             [
@@ -341,7 +405,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "counter",
-        "x": 690,
+        "x": 830,
         "y": 60,
         "wires": []
     },
@@ -359,7 +423,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "counter",
-        "x": 680,
+        "x": 820,
         "y": 120,
         "wires": []
     },
@@ -377,7 +441,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "counter",
-        "x": 660,
+        "x": 800,
         "y": 180,
         "wires": []
     },
@@ -395,7 +459,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "counter",
-        "x": 690,
+        "x": 830,
         "y": 300,
         "wires": []
     },
@@ -404,7 +468,7 @@
         "type": "inject",
         "z": "792c24f42619d667",
         "g": "465b2246c4aec2c8",
-        "name": "",
+        "name": "{\"command\":\"start\",\"service\":\"_waka\"}",
         "props": [
             {
                 "p": "payload"
@@ -416,13 +480,13 @@
         ],
         "repeat": "",
         "crontab": "",
-        "once": true,
+        "once": false,
         "onceDelay": "2",
         "topic": "",
-        "payload": "{\"command\":\"start\"}",
+        "payload": "{\"command\":\"start\",\"service\":\"_waka\"}",
         "payloadType": "json",
-        "x": 150,
-        "y": 140,
+        "x": 210,
+        "y": 180,
         "wires": [
             [
                 "186faf910b61cb76"
@@ -451,8 +515,8 @@
         "topic": "",
         "payload": "{\"command\":\"stop\"}",
         "payloadType": "json",
-        "x": 150,
-        "y": 180,
+        "x": 270,
+        "y": 220,
         "wires": [
             [
                 "186faf910b61cb76"
@@ -481,8 +545,8 @@
         "topic": "",
         "payload": "{\t   \"command\":\"updateTXT\",\t   \"txt\":{\"timestamp\":$millis()}\t}",
         "payloadType": "jsonata",
-        "x": 180,
-        "y": 220,
+        "x": 300,
+        "y": 260,
         "wires": [
             [
                 "186faf910b61cb76"
@@ -507,7 +571,7 @@
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 660,
+        "x": 800,
         "y": 240,
         "wires": [
             [
@@ -525,7 +589,7 @@
         "links": [
             "54527d837f71af4a"
         ],
-        "x": 840,
+        "x": 980,
         "y": 240,
         "wires": [],
         "l": true
@@ -539,13 +603,73 @@
         "links": [
             "627a4307fdd3233f"
         ],
-        "x": 140,
-        "y": 260,
+        "x": 260,
+        "y": 300,
         "wires": [
             [
                 "186faf910b61cb76"
             ]
         ],
         "l": true
+    },
+    {
+        "id": "3be511bc15b571d7",
+        "type": "inject",
+        "z": "792c24f42619d667",
+        "g": "465b2246c4aec2c8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "2",
+        "topic": "",
+        "payload": "{\"command\":\"start\"}",
+        "payloadType": "json",
+        "x": 270,
+        "y": 100,
+        "wires": [
+            [
+                "186faf910b61cb76"
+            ]
+        ]
+    },
+    {
+        "id": "348efed9b34e2c21",
+        "type": "inject",
+        "z": "792c24f42619d667",
+        "g": "465b2246c4aec2c8",
+        "name": "{\"command\":\"start\",\"service\":\"_fubar\"}",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "2",
+        "topic": "",
+        "payload": "{\"command\":\"start\",\"service\":\"_fubar\"}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 140,
+        "wires": [
+            [
+                "186faf910b61cb76"
+            ]
+        ]
     }
 ]
