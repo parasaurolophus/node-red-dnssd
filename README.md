@@ -10,6 +10,9 @@ This provides a superset of the functionality supported by
 [node-red-node-discovery](https://flows.nodered.org/node/node-red-node-discovery),
 without generating any warnings in the Node-RED log.
 
+Tested with Node-RED 3.1 running on Node.js 20.x. May not be compatible with
+older versions.
+
 ---
 
 ## dnssd-advertisement

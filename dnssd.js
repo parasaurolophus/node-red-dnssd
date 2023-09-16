@@ -137,6 +137,9 @@ module.exports = function (RED) {
 
         return new Promise((resolve, reject) => {
 
+            RED.nodes.createNode(this, config)
+            node = this
+
             RED.util.evaluateNodeProperty(config.options, config.optionstype, node, null, (err, value) => {
 
                 try {
@@ -147,8 +150,6 @@ module.exports = function (RED) {
 
                     }
 
-                    RED.nodes.createNode(this, config)
-                    node = this
                     node.options = value
                     node.service = config.service
                     node.port = Number.parseInt(config.port)
@@ -280,10 +281,11 @@ module.exports = function (RED) {
 
         return new Promise((resolve, reject) => {
 
+            RED.nodes.createNode(this, config)
+            node = this
+
             try {
 
-                RED.nodes.createNode(this, config)
-                node = this
                 node.service = config.service
                 node.udp = config.udp
                 node.on('input', onBrowserInput)
