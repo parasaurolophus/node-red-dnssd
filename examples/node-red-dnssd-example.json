@@ -2,7 +2,7 @@
     {
         "id": "eb8472f5b4f4f09d",
         "type": "group",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "name": "browse the \"fubar\" service",
         "style": {
             "label": true
@@ -30,7 +30,7 @@
     {
         "id": "cde393f8b207574d",
         "type": "dnssd-browser",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "eb8472f5b4f4f09d",
         "name": "",
         "service": "_fubar",
@@ -56,7 +56,7 @@
     {
         "id": "e76485d0ae80d311",
         "type": "debug",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "eb8472f5b4f4f09d",
         "name": "serviceUp",
         "active": true,
@@ -74,7 +74,7 @@
     {
         "id": "04f7b3f4e1545b07",
         "type": "debug",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "eb8472f5b4f4f09d",
         "name": "serviceDown",
         "active": true,
@@ -92,7 +92,7 @@
     {
         "id": "18ae337caa41bda5",
         "type": "debug",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "eb8472f5b4f4f09d",
         "name": "browser error",
         "active": true,
@@ -110,7 +110,7 @@
     {
         "id": "9185c789f51b1c14",
         "type": "inject",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "eb8472f5b4f4f09d",
         "name": "{\"command\":\"start\",\"service\":\"_hue\"}",
         "props": [
@@ -130,7 +130,7 @@
         "payload": "{\"command\":\"start\",\"service\":\"_hue\"}",
         "payloadType": "json",
         "x": 220,
-        "y": 480,
+        "y": 500,
         "wires": [
             [
                 "cde393f8b207574d"
@@ -140,7 +140,7 @@
     {
         "id": "9d553b9491953889",
         "type": "inject",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "eb8472f5b4f4f09d",
         "name": "",
         "props": [
@@ -160,7 +160,7 @@
         "payload": "{\"command\":\"stop\"}",
         "payloadType": "json",
         "x": 270,
-        "y": 520,
+        "y": 540,
         "wires": [
             [
                 "cde393f8b207574d"
@@ -170,7 +170,7 @@
     {
         "id": "8c1432a62495b648",
         "type": "inject",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "eb8472f5b4f4f09d",
         "name": "",
         "props": [
@@ -190,7 +190,7 @@
         "payload": "{\"command\":\"list\"}",
         "payloadType": "json",
         "x": 270,
-        "y": 560,
+        "y": 580,
         "wires": [
             [
                 "cde393f8b207574d"
@@ -200,7 +200,7 @@
     {
         "id": "13c716a6a0e6ba98",
         "type": "debug",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "eb8472f5b4f4f09d",
         "name": "list",
         "active": true,
@@ -218,7 +218,7 @@
     {
         "id": "60437fc82f3fb7da",
         "type": "trigger",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "eb8472f5b4f4f09d",
         "name": "",
         "op1": "",
@@ -244,7 +244,7 @@
     {
         "id": "c0b839b10368aa7d",
         "type": "link out",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "eb8472f5b4f4f09d",
         "name": "restart browser",
         "mode": "link",
@@ -259,14 +259,14 @@
     {
         "id": "a7b8f04294f6afd2",
         "type": "link in",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "eb8472f5b4f4f09d",
         "name": "restart browser",
         "links": [
             "c0b839b10368aa7d"
         ],
         "x": 280,
-        "y": 600,
+        "y": 620,
         "wires": [
             [
                 "cde393f8b207574d"
@@ -277,7 +277,7 @@
     {
         "id": "5dbbbda8d233f3dd",
         "type": "inject",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "eb8472f5b4f4f09d",
         "name": "",
         "props": [
@@ -297,7 +297,7 @@
         "payload": "{\"command\":\"start\"}",
         "payloadType": "json",
         "x": 270,
-        "y": 400,
+        "y": 420,
         "wires": [
             [
                 "cde393f8b207574d"
@@ -307,7 +307,7 @@
     {
         "id": "a440e6b4b8611dc8",
         "type": "inject",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "eb8472f5b4f4f09d",
         "name": "{\"command\":\"start\",\"service\":\"_fubar\"}",
         "props": [
@@ -327,7 +327,7 @@
         "payload": "{\"command\":\"start\",\"service\":\"_fubar\"}",
         "payloadType": "json",
         "x": 210,
-        "y": 440,
+        "y": 460,
         "wires": [
             [
                 "cde393f8b207574d"
@@ -337,7 +337,7 @@
     {
         "id": "465b2246c4aec2c8",
         "type": "group",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "name": "advertise the \"fubar\" service on port 6666 with a TXT record formatted using JSONata",
         "style": {
             "label": true
@@ -365,7 +365,7 @@
     {
         "id": "186faf910b61cb76",
         "type": "dnssd-advertisement",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "465b2246c4aec2c8",
         "name": "",
         "service": "_fubar",
@@ -394,7 +394,7 @@
     {
         "id": "2551a0e57b67d8e7",
         "type": "debug",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "465b2246c4aec2c8",
         "name": "instanceRenamed",
         "active": true,
@@ -412,7 +412,7 @@
     {
         "id": "bd6b6932174ccce0",
         "type": "debug",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "465b2246c4aec2c8",
         "name": "hostRenamed",
         "active": true,
@@ -430,7 +430,7 @@
     {
         "id": "ef7fbb29d69dd033",
         "type": "debug",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "465b2246c4aec2c8",
         "name": "stopped",
         "active": true,
@@ -448,7 +448,7 @@
     {
         "id": "a179bebdb1fe4d62",
         "type": "debug",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "465b2246c4aec2c8",
         "name": "advertisement error",
         "active": true,
@@ -466,7 +466,7 @@
     {
         "id": "33b881dbe696cb0c",
         "type": "inject",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "465b2246c4aec2c8",
         "name": "{\"command\":\"start\",\"service\":\"_waka\"}",
         "props": [
@@ -496,7 +496,7 @@
     {
         "id": "8a0b196c3d3d9fc8",
         "type": "inject",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "465b2246c4aec2c8",
         "name": "",
         "props": [
@@ -526,7 +526,7 @@
     {
         "id": "86516f240bf0b2c9",
         "type": "inject",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "465b2246c4aec2c8",
         "name": "updateTXT",
         "props": [
@@ -556,7 +556,7 @@
     {
         "id": "ee68606a0b06cc3d",
         "type": "trigger",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "465b2246c4aec2c8",
         "name": "",
         "op1": "",
@@ -582,7 +582,7 @@
     {
         "id": "627a4307fdd3233f",
         "type": "link out",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "465b2246c4aec2c8",
         "name": "restart advertisement",
         "mode": "link",
@@ -597,7 +597,7 @@
     {
         "id": "54527d837f71af4a",
         "type": "link in",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "465b2246c4aec2c8",
         "name": "restart advertisement",
         "links": [
@@ -615,7 +615,7 @@
     {
         "id": "3be511bc15b571d7",
         "type": "inject",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "465b2246c4aec2c8",
         "name": "",
         "props": [
@@ -645,7 +645,7 @@
     {
         "id": "348efed9b34e2c21",
         "type": "inject",
-        "z": "792c24f42619d667",
+        "z": "997fb608a945ca72",
         "g": "465b2246c4aec2c8",
         "name": "{\"command\":\"start\",\"service\":\"_fubar\"}",
         "props": [

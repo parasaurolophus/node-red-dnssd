@@ -135,48 +135,44 @@ module.exports = function (RED) {
 
         }
 
-        return new Promise((resolve, reject) => {
+        RED.nodes.createNode(this, config)
+        node = this
+        RED.util.evaluateNodeProperty(config.options, config.optionstype, node, null, (err, value) => {
 
-            RED.nodes.createNode(this, config)
-            node = this
+            try {
 
-            RED.util.evaluateNodeProperty(config.options, config.optionstype, node, null, (err, value) => {
+                if (err) {
 
-                try {
-
-                    if (err) {
-
-                        reject(err)
-
-                    }
-
-                    node.options = value
-                    node.service = config.service
-                    node.port = Number.parseInt(config.port)
-                    node.udp = config.udp
-                    node.on('close', (_, done) => {
-
-                        if (advertisement) {
-
-                            advertisement.stop(false, done)
-
-                        } else {
-
-                            done()
-
-                        }
-                    })
-
-                    node.on('input', onAdvertisementInput)
-                    node.status({ text: node.service, shape: 'ring', fill: 'yellow' })
-                    resolve(node)
-
-                } catch (e) {
-
-                    reject(e)
+                    throw err
 
                 }
-            })
+
+                node.options = value
+                node.service = config.service
+                node.port = Number.parseInt(config.port)
+                node.udp = config.udp
+                node.on('close', (_, done) => {
+
+                    if (advertisement) {
+
+                        advertisement.stop(false, done)
+
+                    } else {
+
+                        done()
+
+                    }
+                })
+
+                node.on('input', onAdvertisementInput)
+                node.status({ text: node.service, shape: 'ring', fill: 'yellow' })
+
+            } catch (e) {
+
+                RED.log.error(e)
+                node.status({ text: node.service, shape: 'ring', fill: 'red' })
+
+            }
         })
     }
 
@@ -252,6 +248,13 @@ module.exports = function (RED) {
 
             try {
 
+                if (!(((typeof msg.payload) == 'object') && Object.prototype.hasOwnProperty.call(msg.payload, 'command'))) {
+
+                    RED.log.error(msg.payload)
+                    throw 'ignoring ill-formed input message'
+
+                }
+
                 switch (msg.payload.command) {
 
                     case 'start':
@@ -279,31 +282,29 @@ module.exports = function (RED) {
             }
         }
 
-        return new Promise((resolve, reject) => {
+        RED.nodes.createNode(this, config)
+        node = this
 
-            RED.nodes.createNode(this, config)
-            node = this
+        try {
 
-            try {
+            node.service = config.service
+            node.udp = config.udp
+            node.on('input', onBrowserInput)
+            node.on('close', (_, done) => {
 
-                node.service = config.service
-                node.udp = config.udp
-                node.on('input', onBrowserInput)
-                node.on('close', (_, done) => {
+                stopBrowser()
+                done()
 
-                    stopBrowser()
-                    done()
+            })
 
-                })
-                node.status({ text: node.service, shape: 'ring', fill: 'yellow' })
-                resolve(node)
+            node.status({ text: node.service, shape: 'ring', fill: 'yellow' })
 
-            } catch (e) {
+        } catch (e) {
 
-                reject(e)
+            RED.log.error(e)
+            node.status({ text: node.service, shape: 'ring', fill: 'red' })
 
-            }
-        })
+        }
     }
 
     try {
